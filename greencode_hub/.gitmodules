@@ -1,0 +1,6 @@
+[submodule "greenhub_kernels"]
+	path = greenhub_kernels
+	url = git@git.txstate.edu:Zong-group/greenhub_kernels.git
+[submodule "greenhub_dispatch_server"]
+	path = greenhub_dispatch_server
+	url = git@git.txstate.edu:Zong-group/greenhub_dispatch_server.git

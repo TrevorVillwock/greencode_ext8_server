@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: greencode-deployment
+spec:
+  selector:
+    matchLabels:
+      app: greencode
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: greencode
+    spec:
+      containers:
+        - name: greencode
+          image: "Texas State EECS Group"
+          ports:
+            - containerPort: 3000

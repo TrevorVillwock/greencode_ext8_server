@@ -1,0 +1,2 @@
+warning "@jupyterlab/application > @jupyterlab/ui-components@3.0.7" has unmet peer dependency "react@^17.0.1".
+warning "@jupyterlab/application > @lumino/coreutils@1.8.0" has unmet peer dependency "crypto@1.0.1".

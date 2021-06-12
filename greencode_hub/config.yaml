@@ -1,0 +1,6 @@
+proxy:
+    secretToken: '74cde9677bd0f04f4b7c034e887ac93aac42195f26734e833d721dbb75d55c58'
+singleuser:
+    image:
+        name: codestar12/greenhub_user
+        tag: latest

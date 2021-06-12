@@ -1,0 +1,3 @@
+[submodule "greenhub_measurement_magic"]
+	path = greenhub_measurement_magic
+	url = git@git.txstate.edu:Zong-group/greenhub_measurement_magic.git

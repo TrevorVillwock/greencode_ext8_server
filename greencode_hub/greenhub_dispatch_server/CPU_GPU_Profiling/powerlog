@@ -1,0 +1,38 @@
+#!/bin/bash
+
+#./cpu/cpuLogToFile 1 t & sleep 10; kill $!
+
+# ./cpu/cpuLogToFile 1 t & 
+# export cpulog_PID=$!
+
+# ./gpu/gpuToFIle 1 t &
+# export gpulog_PID=$!
+
+# sleep 10;
+# kill cpulog_PID
+# kill gpulog_PID
+
+
+# trap 'kill %1' SIGINT
+# ./gpu/gpuToFIle $1 $2 & ./cpu/cpuLogToFile $1 $2   
+
+echo start measuring 
+date
+
+# not sure what this is doing ... 1% 2% aren't programs ...
+trap 'kill %1, kill %2' SIGINT
+./CPU_GPU_Profiling/cpu/cpuLogToFile $1 $2 $3 &  
+
+/home/mahler7/miniconda3/bin/python ./CPU_GPU_Profiling/gpu/gpuProfiling.py $1 $2 $3 &
+
+#user program command goes here 
+/home/mahler7/miniconda3/bin/python ./uploads/received_file_$4.py 
+
+sudo pkill cpuLogToFile
+sudo pkill -f ./gpu/gpuProfiling.py
+
+#The measurement will end when $3 time out or user program returns or terminated by the keyboard 'Ctrl + C' 
+
+date
+echo end measuring 
+trap "touch Done_$4" EXIT 
