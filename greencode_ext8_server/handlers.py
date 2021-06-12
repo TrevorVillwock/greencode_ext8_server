@@ -10,7 +10,7 @@ class RouteHandler(APIHandler): # change to inherit from JupyterHandler instead?
     # Jupyter server
     @tornado.web.authenticated
     def get(self):
-        GET '/api/contents/nbtest1.ipynb';
+        # GET '/api/contents/nbtest1.ipynb';
         # APIHandler has method .finish
         # nbconvert here
         # use magic code to send to svr.js and put what it sends back
@@ -32,12 +32,16 @@ def setup_handlers(web_app):
     handlers = [(route_pattern, RouteHandler)]
     web_app.add_handlers(host_pattern, handlers)
 
+    
 # not sure if this is the right place to put this
+"""
 def _load_jupyter_server_extension(serverapp: jupyter_server.serverapp.ServerApp):
-    """
+    
     This function is called when the extension is loaded.
-    """
+    
     handlers = [
         ('/greencode_ext8_server/hello', RouteHandler)
     ]
     serverapp.web_app.add_handlers('.*$', handlers)
+    
+"""

@@ -1,6 +1,6 @@
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  JupyterFrontEndPlugin,
 } from '@jupyterlab/application';
 
 import { ITranslator } from '@jupyterlab/translation';
@@ -11,8 +11,10 @@ import { INotebookModel, NotebookPanel, INotebookTracker } from "@jupyterlab/not
 
 import { IDisposable } from "@lumino/disposable";
 
-import { requestAPI } from './handler';
+//import 'jupyterlab-jupytext';
 
+
+//import * as test1 from './jtest.json';
 
 export class ButtonExtension implements DocumentRegistry.IWidgetExtension<NotebookPanel, INotebookModel> {
     
@@ -26,23 +28,20 @@ export class ButtonExtension implements DocumentRegistry.IWidgetExtension<Notebo
     const { commands } = this.app;
     const command = 'notebook:export-to-format';
 
-    //fetch('http://localhost:9898/api', options);
     const data2 = {"line_1" : "x = 7",
-           "line_2" : "print(x+3)"};
-    
+           "line_2" : "print(x+3)"}
     const options = {
       method: 'POST',
       body: JSON.stringify(data2),
       headers: {'Content-Type': 'application/json'
-      }  
+      }
     };
-
-    
+ 
     // Create the toolbar button
     let mybutton = new ToolbarButton({
       label: 'Measure Power Usage',
       onClick: () => {
-        //fetch('http://localhost:9898/api', options);
+        fetch('http://localhost:9898/api', options);
 
         /*
         fetch('nbtest.ipynb').then(response => {
@@ -55,7 +54,7 @@ export class ButtonExtension implements DocumentRegistry.IWidgetExtension<Notebo
         });
         */
              
-        commands.execute(command, {format: 'script', 'activate': true, download: false});
+        commands.execute(command, {format: 'script', 'activate': true, 'download': false});
           
       }
     });
@@ -68,30 +67,17 @@ export class ButtonExtension implements DocumentRegistry.IWidgetExtension<Notebo
     return mybutton;
   }
 }
-
 /**
- * Initialization data for the greencode-ext8-server extension.
+ * Initialization data for the greencode-ext3 extension.
  */
-const plugin: JupyterFrontEndPlugin<void> = {
-  id: 'greencode-ext8-server:plugin',
+const yourPlugin: JupyterFrontEndPlugin<void> = {
+  id: '@greencode/measureenergy',
   autoStart: true,
   requires: [ITranslator, INotebookTracker],
   activate: (app: JupyterFrontEnd) => {
-    console.log('JupyterLab extension greencode-ext8-server is activated!');
-
-    requestAPI<any>('get_example')
-      .then(data => {
-        console.log(data);
-      })
-      .catch(reason => {
-        console.error(
-          `The greencode_ext8_server server extension appears to be missing.\n${reason}`
-        );
-      });
-      
     const your_button = new ButtonExtension(app);
     app.docRegistry.addWidgetExtension('Notebook', your_button);
   }
-};
+}
 
-export default plugin;
+export default yourPlugin;
