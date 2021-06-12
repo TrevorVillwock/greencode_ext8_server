@@ -27,7 +27,7 @@ export class ButtonExtension implements DocumentRegistry.IWidgetExtension<Notebo
   createNew(panel: NotebookPanel, context: DocumentRegistry.IContext<INotebookModel>): IDisposable {
     const { commands } = this.app;
     const command = 'notebook:export-to-format';
-
+    /*
     const data2 = {"line_1" : "x = 7",
            "line_2" : "print(x+3)"}
     const options = {
@@ -36,12 +36,13 @@ export class ButtonExtension implements DocumentRegistry.IWidgetExtension<Notebo
       headers: {'Content-Type': 'application/json'
       }
     };
+    */
  
     // Create the toolbar button
     let mybutton = new ToolbarButton({
       label: 'Measure Power Usage',
       onClick: () => {
-        fetch('http://localhost:9898/api', options);
+        //fetch('http://localhost:9898/api', options);
 
         /*
         fetch('nbtest.ipynb').then(response => {
